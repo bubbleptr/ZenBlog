@@ -2,7 +2,7 @@
 import type { Language } from '@/i18n/config';
 import type { TocHeading } from '@/features/blog/toc';
 import { shouldShowToc } from '@/features/blog/toc';
-import CrispToc from '@/shared/components/navigation/CrispToc.client';
+import ArticleHookToc from '@/features/blog/components/ArticleHookToc.client';
 
 interface Props {
   lang: Language;
@@ -23,13 +23,10 @@ const items = headings.map((heading) => ({
 ---
 
 <aside class="article-toc-aside">
-  <CrispToc
+  <ArticleHookToc
     client:media="(min-width: 1280px)"
     items={items}
-    ariaLabel={title}
-    showThemeBar={false}
-    showFooter={false}
-    scrollSpy
+    label={title}
     className="article-toc"
   />
 </aside>

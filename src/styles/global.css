@@ -357,25 +357,12 @@ body {
     display: none;
   }
 
-  .article-toc.crisp-toc--article {
-    /* Article ToC is site navigation UI, not part of the CrispToc demo:
-       override the demo's mono stack with the site UI font tokens. */
+  .article-toc {
     font-family: var(--font-ui);
   }
 
-  .article-toc.crisp-toc--article .crisp-toc-list {
-    max-height: min(40vh, 18rem);
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-
-  .article-toc.crisp-toc--article .crisp-toc-item {
-    color: var(--color-ink-secondary);
+  .article-toc a {
     text-decoration: none;
-    font-size: var(--font-size-ui-sm);
-    transition:
-      color 320ms ease,
-      transform 0ms linear;
   }
 
   @media (min-width: 1280px) {
@@ -390,33 +377,17 @@ body {
       pointer-events: none;
     }
 
-    .article-toc.crisp-toc--article {
+    .article-toc {
       position: sticky;
       top: 7rem;
       margin: 0;
       width: 100%;
       max-width: none;
       max-height: calc(100vh - 8rem);
+      overflow-y: auto;
       pointer-events: auto;
+      scrollbar-width: thin;
     }
-
-    .article-toc.crisp-toc--article .crisp-toc-list {
-      max-height: min(calc(100vh - 10rem), 100%);
-    }
-  }
-
-  .article-toc.crisp-toc--article .crisp-toc-item:hover {
-    color: var(--color-ink-strong);
-  }
-
-  .article-toc.crisp-toc--article .crisp-toc-item.is-active {
-    color: var(--color-accent);
-    font-weight: var(--font-weight-medium);
-  }
-
-  /* Connector line inherits the article accent so it reads as one unit with the label. */
-  .article-toc.crisp-toc--article .crisp-toc-tick.crisp-toc-line {
-    --crisp-tick-ink: var(--color-accent);
   }
 
   /* 链接 */
