@@ -97,6 +97,10 @@ export const en = {
   'blog.lightbox.prev': 'Previous image',
   'blog.lightbox.next': 'Next image',
   'blog.lightbox.close': 'Close preview',
+  'blog.code.wrap': 'Wrap lines',
+  'blog.code.unwrap': 'Unwrap lines',
+  'blog.code.copy': 'Copy',
+  'blog.code.copied': 'Copied',
 
   // Footer
   'footer.rights': 'All rights reserved',

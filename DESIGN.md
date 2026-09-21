@@ -192,6 +192,7 @@ Header 字标 + 少量导航，active 青竹。Footer 纯文本一行。代码�
 - **Do** 显示衬线只做标题，正文导航永远 MiSans。
 - **Do** 深浅双主题同等打磨，深色用描边替代阴影。
 - **Do** 图片显式宽高、显示字体和手写字体 preload 或子集化、44px 触达目标。
+- **Do** 博客首图按 `docs/design/blog-hero-prompts.md` 生成：莫兰迪静物，同一张桌子，只换器物。
 
 ### Don't
 

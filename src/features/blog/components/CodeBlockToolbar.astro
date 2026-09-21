@@ -1,0 +1,44 @@
+---
+import type { Language } from '@/i18n/config';
+import { getTranslationDictionary } from '@/shared/i18n/types';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslationDictionary(lang);
+---
+
+<div
+  id="code-block-toolbar-config"
+  hidden
+  data-wrap={t['blog.code.wrap']}
+  data-unwrap={t['blog.code.unwrap']}
+  data-copy={t['blog.code.copy']}
+  data-copied={t['blog.code.copied']}
+>
+</div>
+
+<script>
+  import { initCodeBlockToolbar, teardownCodeBlockToolbar } from '@/features/blog/code-block-toolbar.client';
+
+  function getCodeBlockLabels() {
+    const config = document.getElementById('code-block-toolbar-config');
+
+    return {
+      wrap: config?.dataset.wrap ?? 'Wrap lines',
+      unwrap: config?.dataset.unwrap ?? 'Unwrap lines',
+      copy: config?.dataset.copy ?? 'Copy',
+      copied: config?.dataset.copied ?? 'Copied',
+    };
+  }
+
+  function bootCodeBlockToolbar() {
+    initCodeBlockToolbar({ labels: getCodeBlockLabels() });
+  }
+
+  bootCodeBlockToolbar();
+  document.addEventListener('astro:page-load', bootCodeBlockToolbar);
+  document.addEventListener('astro:before-swap', teardownCodeBlockToolbar);
+</script>

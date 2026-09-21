@@ -525,6 +525,32 @@ body {
     box-shadow: var(--elevation-raised);
   }
 
+  .prose pre.is-wrapped,
+  .prose pre.is-wrapped code,
+  .prose pre.is-wrapped .line {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .prose pre.is-wrapped {
+    overflow-x: hidden;
+  }
+
+  .code-block-toolbar {
+    @apply absolute top-3 right-3 z-10 flex items-center gap-0.5;
+  }
+
+  .code-block-toolbar-button {
+    @apply inline-flex size-7 items-center justify-center rounded-md;
+    @apply text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200;
+    @apply hover:bg-zinc-100/80 dark:hover:bg-zinc-800/80;
+    @apply transition-colors cursor-pointer border-0 bg-transparent;
+  }
+
+  .code-block-toolbar-button[aria-pressed='true'] {
+    @apply text-zinc-800 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800;
+  }
+
   .astro-code,
   .astro-code span {
     color: var(--shiki-light);
