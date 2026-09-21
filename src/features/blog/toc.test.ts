@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import { extractMarkdownHeadings } from '../../remark/extract-markdown-headings.mjs';
-import { shouldShowToc, getArticleTocHeadings } from '@/features/blog/toc';
+import { shouldShowToc, getArticleTocHeadings, getActiveTocIndex } from '@/features/blog/toc';
 
 describe('extractMarkdownHeadings', () => {
   test('extracts h2 and h3 with anchor-compatible slugs', () => {
@@ -41,6 +41,28 @@ describe('shouldShowToc', () => {
         { slug: 'b', text: 'B', depth: 2 },
       ]),
     ).toBe(true);
+  });
+});
+
+describe('getActiveTocIndex', () => {
+  const tops = [1000, 2000, 4000];
+
+  test('stays on the first heading until the scroll anchor reaches it', () => {
+    expect(getActiveTocIndex(tops, 0, 96)).toBe(0);
+    expect(getActiveTocIndex(tops, 903, 96)).toBe(0);
+  });
+
+  test('advances to the last heading the anchor has reached', () => {
+    expect(getActiveTocIndex(tops, 1904, 96)).toBe(1);
+    expect(getActiveTocIndex(tops, 3904, 96)).toBe(2);
+  });
+
+  test('treats a heading a fraction below the anchor as reached', () => {
+    expect(getActiveTocIndex([1000, 2000.2], 1904, 96)).toBe(1);
+  });
+
+  test('skips headings that are not in the document', () => {
+    expect(getActiveTocIndex([null, 2000, null], 2000, 96)).toBe(1);
   });
 });
 

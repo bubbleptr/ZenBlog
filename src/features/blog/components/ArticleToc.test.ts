@@ -8,9 +8,10 @@ describe('ArticleToc Astro integration', () => {
     expect(source).toContain('className="article-toc"');
   });
 
-  test('keeps the crisp tick sound enabled on article pages', () => {
+  test('renders the hook sidebar and leaves CrispToc off the article page', () => {
     const source = readFileSync(new URL('./ArticleToc.astro', import.meta.url), 'utf8');
 
-    expect(source).not.toContain('soundEnabled={false}');
+    expect(source).toContain('ArticleHookToc');
+    expect(source).not.toContain('CrispToc');
   });
 });
