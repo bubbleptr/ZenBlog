@@ -13,6 +13,7 @@ import GiscusComments from '@/features/blog/components/GiscusComments.client';
 import BlogColophon from '@/features/blog/components/BlogColophon.astro';
 import BlogPostFollowCTA from '@/features/blog/components/BlogPostFollowCTA.astro';
 import BlogImageLightbox from '@/features/blog/components/BlogImageLightbox.astro';
+import CodeBlockToolbar from '@/features/blog/components/CodeBlockToolbar.astro';
 import { resolveBlogAuthor } from '@/features/blog/authors';
 import { isIndieDevWeeklyPost } from '@/features/blog/series';
 import { withTrailingSlash } from '@/shared/urls';
@@ -187,5 +188,6 @@ const resolvedAuthor = resolveBlogAuthor(author, lang);
 
     <SiteFooter />
     <BlogImageLightbox lang={lang} />
+    <CodeBlockToolbar lang={lang} />
   </body>
 </html>

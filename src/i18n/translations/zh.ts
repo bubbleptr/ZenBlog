@@ -92,6 +92,10 @@ export const zh = {
   'blog.lightbox.prev': '上一张',
   'blog.lightbox.next': '下一张',
   'blog.lightbox.close': '关闭预览',
+  'blog.code.wrap': '折行',
+  'blog.code.unwrap': '不折行',
+  'blog.code.copy': '复制',
+  'blog.code.copied': '已复制',
 
   // 页脚
   'footer.rights': '版权所有',
