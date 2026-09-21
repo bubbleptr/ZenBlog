@@ -93,6 +93,10 @@ const translatedHeadings = new Map(
     小结: ['takeaways'],
     结构化并发的运行时化组件生命周期: ['structured', 'concurrency', 'as', 'component', 'lifecycle'],
     工程实践与数学推导能否一致: ['practice', 'and', 'formalism'],
+    实战拆解商业级图像生成典型范例: ['commercial', 'image', 'generation', 'examples'],
+    进阶实战图像编辑与跨图一致性工作流: ['advanced', 'edits', 'and', 'consistency'],
+    开发者落地生产环境评估与迁移六步法: ['production', 'eval', 'and', 'migration'],
+    总结从玩图到交付的范式跃迁: ['from', 'playing', 'to', 'shipping'],
   }),
 );
 
