@@ -53,6 +53,7 @@
 
   /* 正文 */
   --font-size-body: 1rem; /* 16px */
+  --font-size-body-en: 1.125rem; /* 18px：Spectral x-height 小，需要大一号才和中文正文等大 */
   --font-size-body-lg: 1.25rem; /* 20px */
 
   /* 正文中的标题 */
