@@ -1,0 +1,192 @@
+---
+// 周报 #3 第二部分：基于 Lody 的多 Agent 编排流程。颜色全部走站点 token，明暗主题自动切换。
+const label =
+  '我和 Planner 定方案并在睡前拆成 GitHub Issue；Lody 通过 ACP 把 Issue 按 brief 派给 Omarchy 和 Mac 上的 worker；PR 经自部署检视系统，第二天早上回到我手里。涉及协议或决策变更时 Critic 做对抗性审查，双方一致后交我拍板。';
+---
+
+<figure class="agent-diagram not-prose">
+  <div class="scroller">
+    <svg viewBox="0 0 600 552" role="img" aria-label={label}>
+      <defs>
+        <marker id="lody-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="head" />
+        </marker>
+        <marker id="lody-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="head-accent" />
+        </marker>
+      </defs>
+
+      <!-- 人 -->
+      <rect x="230" y="12" width="140" height="40" rx="8" class="box" />
+      <text x="300" y="37" class="title">我</text>
+
+      <!-- Lody 编排层 -->
+      <rect x="20" y="84" width="560" height="346" rx="12" class="frame" />
+      <text x="36" y="106" class="frame-label">Lody 编排层 · ACP</text>
+
+      <!-- Agent Roles -->
+      <rect x="36" y="124" width="150" height="54" rx="8" class="box" />
+      <text x="111" y="146" class="title">Writer</text>
+      <text x="111" y="164" class="sub">Gemini Argon 4 · 文案</text>
+
+      <rect x="225" y="124" width="150" height="54" rx="8" class="box box-accent" />
+      <text x="300" y="146" class="title">Planner</text>
+      <text x="300" y="164" class="sub">Opus 5.5 · 主循环</text>
+
+      <rect x="414" y="124" width="150" height="54" rx="8" class="box" />
+      <text x="489" y="146" class="title">Critic</text>
+      <text x="489" y="164" class="sub">GPT Sol 6.1 · 对抗审查</text>
+
+      <!-- 我 ⇄ Planner：human in the loop -->
+      <line x1="300" y1="52" x2="300" y2="124" class="edge-accent" marker-start="url(#lody-arrow-accent)" marker-end="url(#lody-arrow-accent)" />
+      <text x="310" y="74" class="edge-label">架构讨论 · spec</text>
+
+      <!-- Planner ⇄ Critic -->
+      <line x1="375" y1="151" x2="414" y2="151" class="edge dashed" marker-start="url(#lody-arrow)" marker-end="url(#lody-arrow)" />
+      <!-- 共识交我拍板 -->
+      <polyline points="489,124 489,32 370,32" class="edge dashed" marker-end="url(#lody-arrow)" />
+      <text x="430" y="24" class="edge-label" text-anchor="middle">一致后交我拍板</text>
+
+      <!-- Planner → Issues -->
+      <line x1="300" y1="178" x2="300" y2="226" class="edge" marker-end="url(#lody-arrow)" />
+      <text x="310" y="206" class="edge-label">睡前拆成 Issue</text>
+
+      <rect x="215" y="226" width="170" height="44" rx="8" class="box" />
+      <text x="300" y="253" class="title">GitHub Issues</text>
+
+      <!-- Issues → workers -->
+      <polyline points="300,270 300,292 160,292 160,344" class="edge" marker-end="url(#lody-arrow)" />
+      <polyline points="300,292 440,292 440,344" class="edge" marker-end="url(#lody-arrow)" />
+      <text x="310" y="308" class="edge-label">按 brief 派发</text>
+
+      <!-- 两台机器 -->
+      <rect x="40" y="314" width="240" height="100" rx="10" class="machine" />
+      <text x="56" y="332" class="frame-label">Omarchy 小主机</text>
+      <rect x="60" y="344" width="200" height="54" rx="8" class="box" />
+      <text x="160" y="366" class="title">Linux-worker</text>
+      <text x="160" y="384" class="sub">DeepSeek V4.1 Flash</text>
+
+      <rect x="320" y="314" width="240" height="100" rx="10" class="machine" />
+      <text x="336" y="332" class="frame-label">MacBook Pro</text>
+      <rect x="340" y="344" width="200" height="54" rx="8" class="box" />
+      <text x="440" y="366" class="title">Apple-worker</text>
+      <text x="440" y="384" class="sub">DeepSeek V4.1 Flash</text>
+
+      <!-- workers → 检视 -->
+      <polyline points="160,398 160,476 210,476" class="edge" marker-end="url(#lody-arrow)" />
+      <polyline points="440,398 440,476 390,476" class="edge" marker-end="url(#lody-arrow)" />
+      <text x="168" y="452" class="edge-label">PR</text>
+      <text x="432" y="452" class="edge-label" text-anchor="end">PR</text>
+
+      <rect x="210" y="454" width="180" height="44" rx="8" class="box" />
+      <text x="300" y="481" class="title">自部署检视系统</text>
+
+      <!-- 检视 → 我：第二天收菜 -->
+      <polyline points="300,498 300,524 6,524 6,32 230,32" class="edge" marker-end="url(#lody-arrow)" />
+      <text x="153" y="542" class="edge-label" text-anchor="middle">第二天起床收菜</text>
+    </svg>
+  </div>
+  <figcaption>
+    Planner 是和我沟通的主循环；睡前拆好的 Issue 由 Lody 派给两台机器上的 worker 过夜实现，PR
+    经检视后第二天早上回到我手里。
+  </figcaption>
+</figure>
+
+<style>
+  .agent-diagram {
+    margin-block: 2rem;
+  }
+
+  /* 窄屏下保持可读字号，改为横向滑动 */
+  .scroller {
+    overflow-x: auto;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 34rem;
+    height: auto;
+    font-size: 13px;
+  }
+
+  .box {
+    fill: var(--surface);
+    stroke: var(--ink-tertiary);
+    stroke-width: 1;
+  }
+
+  .box-accent {
+    stroke: var(--accent);
+    stroke-width: 1.5;
+  }
+
+  .frame,
+  .machine {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+
+  .frame {
+    stroke-dasharray: 5 4;
+  }
+
+  .title {
+    fill: var(--ink-strong);
+    font-size: 14px;
+    font-weight: 600;
+    text-anchor: middle;
+  }
+
+  .sub {
+    fill: var(--ink-secondary);
+    font-size: 11.5px;
+    text-anchor: middle;
+  }
+
+  .frame-label {
+    fill: var(--ink-tertiary);
+    font-size: 11.5px;
+  }
+
+  .edge,
+  .edge-accent {
+    fill: none;
+    stroke-width: 1.25;
+  }
+
+  .edge {
+    stroke: var(--ink-secondary);
+  }
+
+  .edge-accent {
+    stroke: var(--accent);
+    stroke-width: 1.5;
+  }
+
+  .dashed {
+    stroke-dasharray: 4 3;
+  }
+
+  .head {
+    fill: var(--ink-secondary);
+  }
+
+  .head-accent {
+    fill: var(--accent);
+  }
+
+  .edge-label {
+    fill: var(--ink-secondary);
+    font-size: 12px;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    text-align: center;
+  }
+</style>

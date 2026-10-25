@@ -11,6 +11,10 @@
 /images/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
+# 文章内嵌视频：中期缓存（同图片）
+/videos/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
 # Logo / 图标：长期缓存
 /logos/*
   Cache-Control: public, max-age=31536000, immutable
