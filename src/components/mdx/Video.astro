@@ -1,0 +1,59 @@
+---
+interface Props {
+  src: string;
+  poster?: string;
+}
+
+const { src, poster } = Astro.props;
+---
+
+<figure class="mdx-video not-prose">
+  <video controls playsinline preload="metadata" poster={poster}>
+    <source src={src} type="video/mp4" />
+  </video>
+  {
+    Astro.slots.has('default') && (
+      <figcaption>
+        <slot />
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .mdx-video {
+    margin-block: 2rem;
+  }
+
+  video {
+    display: block;
+    width: 100%;
+    height: auto;
+    outline: 1px solid rgb(0 0 0 / 0.1);
+    outline-offset: -1px;
+  }
+
+  :global(.dark) video {
+    outline-color: rgb(255 255 255 / 0.1);
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    text-align: center;
+  }
+
+  /* MDX 会把多行子内容包成 <p> */
+  figcaption :global(p) {
+    margin: 0;
+    text-align: inherit;
+  }
+
+  figcaption :global(a) {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

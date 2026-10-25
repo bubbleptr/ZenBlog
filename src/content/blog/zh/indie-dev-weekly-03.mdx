@@ -1,0 +1,78 @@
+---
+title: '周报 #3 追逐模型的热潮褪去，我的 10x 工作流是如何工作的'
+description: '独立开发周报第三期：AI 热潮放缓后的心态变化，基于 Lody 的多 Agent 编排工作流，以及用 Claude 打磨 UI/UX 的方法。'
+pubDate: '2026-10-25'
+heroImage: '../images/indie-dev-weekly-03-cover.webp'
+showOnHome: true
+lang: zh
+tags: ['独立开发周报']
+---
+
+import LodyAgentTeamDiagram from '@/components/mdx/diagrams/LodyAgentTeamDiagram.astro';
+
+很久没写开发周报了，想说的有很多，先说情绪面吧。
+
+最近我明显感受到 AI 的脚步在放缓，我自己的 FOMO 情绪消失很多。我为什么会这么觉得，有以下几点：
+
+1. 强如 OpenAI 这样的公司，最近也在没活烂整，Tibo 那个 28 天计划，天天不知道在搞什么东西。
+
+2. 再也没有出现像 OpenClaw 这种现象级的产品了，说明很多人可能生活中真的用不上 AI，除非 AGI 已经到来。
+
+3. 现在模型的 Coding 和 Design 以及 3D 能力都足够强了，足够我完成很多以前想都不敢想的作品。所以就算未来几个月没有更强的模型出现，我也依然能完成我的很多 idea。
+
+而我现在想做的更多的是静下心来学习自己薄弱的一部分，比如 UI/UX 设计；构建和 Agent 协作的信任环境，把效率高质量地提高，成为一个 10x 工程师。
+
+## 一、介绍工具以及工作流
+
+这部分应该是大家喜欢看的，看到新的工具或者工作流，直接拿来用或者去尝试一下，这也是我喜欢做的事情。但是，本着对文字负责的态度，还是请读者只作为参考，找到最合适自己的。
+
+**开发机器：**
+
+- mac book pro 48G + 512G，磁盘空间太少了准备换新的 macmini。
+
+- omarchy 小主机 64G + 2T，铭凡家的 X1 Pro H470，逐渐成为日常主力机。
+
+**工作流：**
+
+这里其实有两套工作流，一个是偏向更自动化和长程任务的 orchestration 模式的多 agent 系统，我使用的工具是 [Lody](https://lody.ai/login?ref=5e9e10e4e62e4efd960e909ec80bd9f6) 作为编排层。而另一个就是直接使用 Claude。下面来讲讲分工。
+
+## 二、基于 lody 的 多 agent 编排系统
+
+简单介绍 [Lody](https://lody.ai/login?ref=5e9e10e4e62e4efd960e909ec80bd9f6) ，这是一个编排多 Harness 的控制面软件，基于 ACP 协议控制不同的电脑上不同的 harness，几乎覆盖了所有主流的 Harness。Lody 还拥有 Agent Role 具名代理的功能，可以配置不同分工的 Agent 预设。
+
+我的 Agent Team 分工如下：
+
+- Planner：Opus 5.5，负责架构和方案设计，是 human in the loop 的沟通主循环
+
+- Linux-worker：DeepSeek V4.1 Flash，力工模型主要负责实现代码，在我的 Omarchy 上工作
+
+- Apple-worker：同上，在我的 Mac 上工作。
+
+- Critic：GPT Sol 6.1，负责对抗性审查设计方案。
+
+- Writer：Gemini Argon 4，负责中文文字润色，主要是网站 SEO 和 App 文案。
+
+planner 是主循环，负责和我设计架构方案和做特性 spec。定下来具体怎么做以后，由两个 worker 来实施，因为我的项目是跨平台开发，所以这里有两个 worker 分别在 Omarchy 和 Mac 上进行开发。派发工作遵循我设计的 brief 格式，最后由我自部署的检视系统进行检视。至于 critic 主要是对涉及到协议或决策变更进行的对抗性审查，一般在 planner 和 critic 达成一致之后的决策问题再由我决定。
+
+<LodyAgentTeamDiagram />
+
+整套 Multiple Agent System \(MAS\) 和我的 skills 配合，我一般会在睡觉之前开启一个大特性或者大的架构设计讨论，然后拆成好几个 GitHub Issue，留给 lody 在睡觉的时候去跑，第二天起床的时候查看结果。没错，这很像 QQ 农场去收菜。
+
+那其实一些零碎的 bug 也可以这么操作，比如我某天只和 planner 去沟通这些小 bug，然后它会去调查清楚现状后开启一个 issue ，在里面描述好 bug 的现象，在睡觉前我依然可以开启一个 goal 去清理我白天记录的这些问题。
+
+这个工作流持续快一个月了，现在每天的 PR 量平均在 100 个左右，勉强达到了我 10x 的目标。
+
+## 三、单独使用 Claude 进行 UI/UX 的打磨
+
+对于 UI/UX 的打磨，我更倾向于直接使用 Claude Desktop 去做，一个是看实时的效果非常方便，另一方面是我觉得前端的工作更需要人一直去把控方向。作为前端和设计小白的我也一直还在摸索之中，目前比较喜欢先产出多种 Prototype 方案，然后对比微调自己喜欢的那个原型，最后再落实到项目上。
+
+一个小技巧，可以单独在你的应用里做一个 Design 页面或者建立自己的 StoryBook，方便以后浏览你所有打磨过的组件。
+
+**至于审美和品味如何积累**？目前我还在参考和学习的阶段，我会去大量的浏览其他产品或者一些设计师的设计，看多了之后，你想到一个场景可能就会马上浮现出 UI 的样子，你大概知道应该怎么做。然后再用上面的流程，从原型开始设计和打磨。
+
+<Video
+  src="/videos/indie-dev-weekly-03/design-catalog.mp4"
+  poster="/videos/indie-dev-weekly-03/design-catalog-poster.jpg"
+>
+  原帖发布于 [X](https://x.com/ninthbit_ai/status/2114011345058435098)
+</Video>

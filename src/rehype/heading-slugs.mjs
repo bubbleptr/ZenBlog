@@ -97,6 +97,7 @@ const translatedHeadings = new Map(
     进阶实战图像编辑与跨图一致性工作流: ['advanced', 'edits', 'and', 'consistency'],
     开发者落地生产环境评估与迁移六步法: ['production', 'eval', 'and', 'migration'],
     总结从玩图到交付的范式跃迁: ['from', 'playing', 'to', 'shipping'],
+    一介绍工具以及工作流: ['tools', 'and', 'workflow'],
   }),
 );
 
