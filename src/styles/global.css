@@ -224,6 +224,10 @@ body {
 
   .prose:lang(en) {
     font-family: var(--font-serif-en-stack);
+    /* Spectral's x-height is ~0.45em against MiSans' ~0.53em, so 16px reads a
+       size smaller than the zh body; 18px evens them out and brings the 40rem
+       column from ~83 down to ~74 characters a line */
+    font-size: var(--font-size-body-en);
     /* Serif reading text sits comfortably tighter than CJK */
     line-height: 1.65;
   }

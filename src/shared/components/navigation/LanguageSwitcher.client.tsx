@@ -39,9 +39,7 @@ export default function LanguageSwitcher({
     const localizedPath = getLocalizedPath(lang);
     const isCurrent = currentLang === lang;
     const className = `no-underline transition-colors ${
-      isCurrent
-        ? 'text-zinc-900 dark:text-zinc-100 font-normal'
-        : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-400'
+      isCurrent ? 'text-ink-strong' : 'text-ink-secondary hover:text-ink-strong'
     }`;
 
     if (!localizedPath) {
@@ -56,7 +54,7 @@ export default function LanguageSwitcher({
   };
 
   return (
-    <div className="flex items-center gap-2 text-sm font-normal">
+    <div className="flex items-center gap-2 text-sm font-medium">
       {renderLanguage('en', 'EN')}
       <span className="text-zinc-300 dark:text-zinc-700">/</span>
       {renderLanguage('zh', 'ZH')}

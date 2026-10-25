@@ -130,7 +130,7 @@ export default function SiteHeader({ currentPath, lang, t, localizedPaths }: Sit
         {/* -mx-2.5 eats the first/last link's hit-area padding so the visible
             text edge lines up with the max-w-content column below */}
         <nav
-          className="hidden sm:flex items-center gap-1 -mx-2.5 text-sm text-zinc-500 dark:text-zinc-400"
+          className="hidden sm:flex items-center gap-1 -mx-2.5 text-sm font-medium text-ink-secondary"
           aria-label="Primary"
         >
           {navItems.map((item) => {
